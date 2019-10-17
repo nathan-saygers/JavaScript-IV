@@ -31,8 +31,9 @@ const louie = new Person({
   location: 'Arkansas'
 });
 
-console.log(fred.speak());
-console.log('Louie Test ' + louie.age);
+// Person Tests:
+// console.log(fred.speak());
+// console.log('Louie Test ' + louie.age);
 
 // #### Instructor
 
@@ -81,8 +82,8 @@ const britt = new Instructor({
   catchPhrase: 'I am going to make a thread'
 })
 
-console.log(faye.demo('boxing'));
-console.log(faye.grade(fred, 'masonry'));
+// console.log(faye.demo('boxing'));
+// console.log(faye.grade(fred, 'masonry'));
 
 
 // #### Student
@@ -95,8 +96,42 @@ console.log(faye.grade(fred, 'masonry'));
 //   * `favSubjects`. i.e. an array of the student's favorite subjects ['Html', 'CSS', 'JavaScript']
 // * Student has the following methods:
 //   * `listsSubjects` a method that logs out all of the student's favoriteSubjects one by one.
-//   * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has submitted a PR for {subject}`
+//   * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has 
+//      submitted a PR for {subject}`
 //   * `sprintChallenge` similar to PRAssignment but logs out `student.name has begun sprint challenge on {subject}`
+
+class Student extends Person {
+  constructor(studAttr) {
+    super(studAttr);
+    this.background = studAttr.background;
+    this.className = studAttr.className;
+    this.favSubjects = studAttr.favSubjects;
+  }
+  listsSubjects(){
+    const it = this.favSubjects.values()
+    for (const value of it)
+    return value;
+  }
+  prAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`
+  }
+  sprintChallenge(subject){
+    return `${this.name} has begun sprint challenge on ${subject}`
+  }
+}
+
+const nate = new Student({
+  name: 'Nate',
+  age: '30',
+  location: 'Oregon',
+  background: 'Project Management',
+  className: 'Web_25',
+  favSubjects: ['JS', 'CSS', 'LESS'], 
+})
+
+// console.log(nate.listsSubjects()); // Only returns the first value from the array
+// console.log(nate.prAssignment('Javascript'));
+// console.log(nate.sprintChallenge('CSS'));
 
 // #### Project Manager
 
@@ -107,7 +142,37 @@ console.log(faye.grade(fred, 'masonry'));
 //   * `favInstructor`: i.e. Sean
 // * ProjectManagers have the following Methods:
 //   * `standUp` a method that takes in a slack channel and logs `{name} announces to {channel}, @channel standy times!​​​​​
-//   * `debugsCode` a method that takes in a student object and a subject and logs out `{name} debugs {student.name}'s code on {subject}`
+//   * `debugsCode` a method that takes in a student object and a subject and logs out 
+//     `{name} debugs {student.name}'s code on {subject}`
+
+class ProjectManager extends Instructor {
+  constructor(pmAttr){
+    super(pmAttr);
+    this.gradClassName = pmAttr.gradClassName;
+    this.favInstructor = pmAttr.favInstructor;
+  }
+  standup(slackChannel){
+    return `${this.name} announces to ${slackChannel}, @channel standy time!`
+  }
+  debugsCode(Student, subject){
+    return `${this.name} debugs ${Student.name}'s code on ${subject}`
+  }
+}
+
+const fayejr = new ProjectManager({
+  name: 'Faye Jr.',
+  age: 5.5,
+  location: 'Cali',
+  specialty: 'Helping.Jr',
+  favLanguage: 'Somethin cool',
+  catchPhrase: 'llittle finger guns, little sunglasses emoji',
+  gradClassName: 'CS -1',
+  favInstructor: 'Faye'
+});
+
+console.log(fayejr.age);
+console.log(fayejr.standup('#CoolKidsofWeb25'));
+console.log(fayejr.debugsCode(nate, 'Javascript'));
 
 // #### Stretch Problem
 
