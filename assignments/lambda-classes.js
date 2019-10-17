@@ -1,13 +1,6 @@
 // CODE here for your Lambda Classes
 
 // #### Person
-
-// * First we need a Person class. This will be our `base-class`
-// * Person receives `name` `age` `location` all as props
-// * Person receives `speak` as a method.
-// * This method logs out a phrase `Hello my name is Fred, I am from Bedrock` where `name` 
-// *  and `location` are the object's own props
-
 class Person {
   constructor(attr){
     this.name = attr.name;
@@ -31,24 +24,7 @@ const louie = new Person({
   location: 'Arkansas'
 });
 
-// Person Tests:
-// console.log(fred.speak());
-// console.log('Louie Test ' + louie.age);
-
 // #### Instructor
-
-// * Now that we have a Person as our base class, we'll build our Instructor class.
-// * Instructor uses the same attributes that have been set up by Person
-// * Instructor has the following unique props:
-//   * `specialty` what the Instructor is good at i.e. 'redux'
-//   * `favLanguage` i.e. 'JavaScript, Python, Elm etc.'
-//   * `catchPhrase` i.e. `Don't forget the homies`
-// * Instructor has the following methods:
-//   * `demo` receives a `subject` string as an argument and logs out the phrase 
-//      'Today we are learning about {subject}' where subject is the param passed in.
-//   * `grade` receives a `student` object and a `subject` string as arguments and 
-//      logs out '{student.name} receives a perfect score on {subject}'
-
 class Instructor extends Person {
   constructor(instAttr){
     super(instAttr);
@@ -82,24 +58,8 @@ const britt = new Instructor({
   catchPhrase: 'I am going to make a thread'
 })
 
-// console.log(faye.demo('boxing'));
-// console.log(faye.grade(fred, 'masonry'));
-
 
 // #### Student
-
-// * Now we need some students!
-// * Student uses the same attributes that have been set up by Person
-// * Student has the following unique props:
-//   * `previousBackground` i.e. what the Student used to do before Lambda School
-//   * `className` i.e. CS132
-//   * `favSubjects`. i.e. an array of the student's favorite subjects ['Html', 'CSS', 'JavaScript']
-// * Student has the following methods:
-//   * `listsSubjects` a method that logs out all of the student's favoriteSubjects one by one.
-//   * `PRAssignment` a method that receives a subject as an argument and logs out that the `student.name has 
-//      submitted a PR for {subject}`
-//   * `sprintChallenge` similar to PRAssignment but logs out `student.name has begun sprint challenge on {subject}`
-
 class Student extends Person {
   constructor(studAttr) {
     super(studAttr);
@@ -108,9 +68,9 @@ class Student extends Person {
     this.favSubjects = studAttr.favSubjects;
   }
   listsSubjects(){
-    const it = this.favSubjects.values()
+    const it = this.favSubjects;
     for (const value of it)
-    return value;
+    console.log(value);
   }
   prAssignment(subject){
     return `${this.name} has submitted a PR for ${subject}`
@@ -129,22 +89,16 @@ const nate = new Student({
   favSubjects: ['JS', 'CSS', 'LESS'], 
 })
 
-// console.log(nate.listsSubjects()); // Only returns the first value from the array
-// console.log(nate.prAssignment('Javascript'));
-// console.log(nate.sprintChallenge('CSS'));
+const rj = new Student({
+  name: 'Raymond John',
+  age: 36,
+  location: 'Oregon',
+  background: 'QA',
+  className: 'Web_26',
+  favSubjects: ['Clambering', 'Clobbering', 'Hard Drinkin', 'Commenting Loudly'],
+})
 
 // #### Project Manager
-
-// * Now that we have instructors and students, we'd be nowhere without our PM's
-// * ProjectManagers are extensions of Instructors
-// * ProjectManagers have the following unique props:
-//   * `gradClassName`: i.e. CS1
-//   * `favInstructor`: i.e. Sean
-// * ProjectManagers have the following Methods:
-//   * `standUp` a method that takes in a slack channel and logs `{name} announces to {channel}, @channel standy times!​​​​​
-//   * `debugsCode` a method that takes in a student object and a subject and logs out 
-//     `{name} debugs {student.name}'s code on {subject}`
-
 class ProjectManager extends Instructor {
   constructor(pmAttr){
     super(pmAttr);
@@ -165,14 +119,39 @@ const fayejr = new ProjectManager({
   location: 'Cali',
   specialty: 'Helping.Jr',
   favLanguage: 'Somethin cool',
-  catchPhrase: 'llittle finger guns, little sunglasses emoji',
+  catchPhrase: 'little finger guns, little sunglasses emoji',
   gradClassName: 'CS -1',
   favInstructor: 'Faye'
 });
 
-console.log(fayejr.age);
-console.log(fayejr.standup('#CoolKidsofWeb25'));
-console.log(fayejr.debugsCode(nate, 'Javascript'));
+const theDarkOne = new ProjectManager({
+  name: 'Beezlebub',
+  age: 'Many Millenia',
+  location: 'the deep',
+  specialty: 'Ancient Darkness',
+  favLanguage: 'Portuguese',
+  catchPhrase: 'eyyyyy, buddy guy',
+  gradClassName: 'The Fall',
+  favInstructor: 'Dan'
+});
+
+// ### Tests
+
+console.log('Person / Fred Test', fred.speak());
+console.log('Person / Louie Test ', louie.age);
+console.log('Instructor / Fay Test', faye.demo('boxing'));
+console.log('Instructor / Britt Test', britt.grade(fred, 'masonry'));
+nate.listsSubjects(); // Function Contains a console.log
+rj.listsSubjects(); // Function Contains a console.log
+console.log('Student / Nate Test', nate.prAssignment('Javascript'));
+console.log('Student / RJ Test', rj.sprintChallenge('CSS'));
+console.log('PM / Faye Jr. Test', fayejr.age);
+console.log('PM / The Dark One Test', theDarkOne.location);
+console.log('PM / The Dark One Test', theDarkOne.standup('#TheDarkCouncil'))
+console.log('PM / The Dark One Test', theDarkOne.grade(rj, 'Walkin Backwards'));
+console.log('PM / Faye Jr. Test', fayejr.standup('#CoolKidsofWeb25'));
+console.log('PM / Faye Jr. Test', fayejr.debugsCode(nate, 'Javascript'));
+
 
 // #### Stretch Problem
 
