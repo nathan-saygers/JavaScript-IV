@@ -18,42 +18,6 @@ Prototype Refactor
 // GameObject.prototype.destroy = function() {
 //   return `${this.name} was removed from the game.`
 // }
-
-class GameObject{
-  constructor(gameProperties){
-    this.createdAt = gameProperties.createdAt;
-    this.name = gameProperties.name;
-    this.dimensions = gameProperties.dimensions;
-  }
-  destroy(){
-    return `${this.name} was removed from the game.`
-  }
-}
-
-class CharacterStats extends GameObject{
-  constructor(charProperties){
-    super(charProperties);
-    this.healthPoints = charProperties.healthPoints;
-    this.name = charProperties.name;
-  }
-  takeDamage(){
-    return this.name + ' took damage.'
-  }
-}
-
-class Humanoid extends CharacterStats {
-  constructor(humanoidProperties){
-    super(humanoidProperties);
-    this.team = humanoidProperties.team;
-    this.weapons = humanoidProperties.weapons;
-    this.language = humanoidProperties.language;
-  }
-  greet(){
-    return `${this.name} offers a greeting in ${this.language}`;
-  }
-}
-
-
 // // Character Stats Constructor //
 // function CharacterStats(charProperties) {
 //   GameObject.call(this, charProperties); // Call in GameObject //
@@ -81,6 +45,46 @@ class Humanoid extends CharacterStats {
 // Humanoid.prototype.greet = function() {
 // return `${this.name} offers a greeting in ${this.language}`;
 // }
+
+class GameObject{
+  constructor(gameProperties){
+    this.createdAt = gameProperties.createdAt;
+    this.name = gameProperties.name;
+    this.dimensions = gameProperties.dimensions;
+  }
+  destroy(){
+    return `${this.name} was removed from the game.`
+  }
+  thankGod(){
+    return `let's use classes from now on`
+  }
+}
+
+class CharacterStats extends GameObject{
+  constructor(charProperties){
+    super(charProperties);
+    this.healthPoints = charProperties.healthPoints;
+    this.name = charProperties.name;
+  }
+  takeDamage(){
+    return this.name + ' took damage.'
+  }
+}
+
+class Humanoid extends CharacterStats {
+  constructor(humanoidProperties){
+    super(humanoidProperties);
+    this.team = humanoidProperties.team;
+    this.weapons = humanoidProperties.weapons;
+    this.language = humanoidProperties.language;
+  }
+  greet(){
+    return `${this.name} offers a greeting in ${this.language}`;
+  }
+}
+
+
+
 
 /*
 === GameObject ===
@@ -176,7 +180,7 @@ console.log(archer.language); // Elvish
 console.log(archer.greet()); // Lilith offers a greeting in Elvish.
 console.log(mage.takeDamage()); // Bruce took damage.
 console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-
+console.log(mage.thankGod()); // Just an extra thing
 
 // Stretch task: 
 // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
